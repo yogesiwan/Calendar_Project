@@ -35,7 +35,7 @@ const MyCalendar = (props) => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/events", {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND}/events`, {
         withCredentials: true,
       });
 
@@ -77,7 +77,7 @@ const MyCalendar = (props) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/events/create",
+        `${import.meta.env.VITE_BACKEND}/events/create`,
         newEvent,
         {
           withCredentials: true,
@@ -106,7 +106,7 @@ const MyCalendar = (props) => {
 
     try {
       await axios.delete(
-        `http://localhost:3000/events/delete/${selectedEvent._id}`,
+        `${import.meta.env.VITE_BACKEND}/events/delete/${selectedEvent._id}`,
         {
           withCredentials: true,
         }
@@ -152,7 +152,7 @@ const MyCalendar = (props) => {
 
     try {
       await axios.put(
-        `http://localhost:3000/events/update/${selectedEvent._id}`,
+       `${import.meta.env.VITE_BACKEND}/events/update/${selectedEvent._id}`,
         updatedEvent,
         {
           withCredentials: true,
@@ -198,7 +198,9 @@ const MyCalendar = (props) => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/users/logout", {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND}/users/logout`,
+      {
         withCredentials: true,
       });
       localStorage.removeItem("loggedIn");

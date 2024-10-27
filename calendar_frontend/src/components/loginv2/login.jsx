@@ -32,10 +32,11 @@ const LoginPage = ({ setLoggedIn }) => {
     const handleLogin = async () => {
         try {
             const response = await axios.post(
-                "http://localhost:3000/users/login",
+              `${import.meta.env.VITE_BACKEND}/users/login`,
                 { email, password },
                 { withCredentials: true }
             );
+            console.log("jaa rha hai");
 
             if (response.data.message === "Logged in Successfully") {
                 setLoggedIn(true);
@@ -53,10 +54,10 @@ const LoginPage = ({ setLoggedIn }) => {
         }
     };
 
-    // Handle signup logic
     const handleSignup = async () => {
         try {
-            const response = await axios.post("http://localhost:3000/users/register", { email, password, username });
+            const response = await axios.post(  `${import.meta.env.VITE_BACKEND}/users/register`,
+                { email, password, username });
             
             if (response.data.message) {
                 setSuccess(response.data.message); 

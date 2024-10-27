@@ -10,7 +10,7 @@ const Signup = ({ setLoggedIn }) => {
 
   const handleSignup = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/users/register", { email, password, username });
+      const response = await axios.post(  `${import.meta.env.VITE_BACKEND}/users/register`, { email, password, username });
       
       if (response.data.message) {
         setShowMessage("Signup successful! You can now login.");
