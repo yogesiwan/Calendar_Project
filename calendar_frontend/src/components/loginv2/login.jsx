@@ -36,7 +36,7 @@ const LoginPage = ({ setLoggedIn }) => {
                 { email, password },
                 { withCredentials: true }
             );
-            console.log("jaa rha hai");
+           
 
             if (response.data.message === "Logged in Successfully") {
                 setLoggedIn(true);

@@ -50,7 +50,7 @@ module.exports.loginUser = async function (req, res) {
 
     // Generate token and send in cookie
     let token = generateToken(user);
-    console.log("backend pe aagya");
+    
     res.cookie("token", token, {
       httpOnly: true,
       secure: true, 
