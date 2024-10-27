@@ -1,0 +1,220 @@
+.rbc-calendar {
+  background-color: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(to right, #6464a7, #e17fcd);
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.5s;
+  cursor: pointer;
+}
+
+.rbc-event {
+  background-color: rgba(224, 224, 224, 0.433);
+  color: white;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.rbc-header {
+  background-color: rgba(224, 224, 224, 0.433);
+  color: #080808;
+  font-weight: bold;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.rbc-time-slot {
+  border-bottom: px solid #ddd;
+}
+
+.rbc-selected-cell {
+  background-color: #b81196 !important;
+  border-radius: 10px;
+}
+
+.rbc-agenda-event-cell, .rbc-agenda-time-cell, .rbc-agenda-date-cell {
+  font-weight: 500;
+}
+
+.rbc-toolbar {
+  font-weight: 1000;
+  color: #2d292c;
+}
+.rbc-toolbar button {
+  color: black;
+}
+.rbc-day-bg + .rbc-day-bg {
+  border-left: 1px solid #bbb5b5;
+}
+.rbc-day-bg.rbc-today {
+  background-color: #f8a2e8;
+}
+.rbc-day-bg.rbc-off-range-bg {
+  background: #8520ad57;
+}
+
+.rbc-label {
+  font-weight: 900;
+}
+
+.rbc-button-link {
+  font-weight: bold;
+}
+
+.btn-custom {
+  background-color: #780270;
+  margin-top: 5px;
+  margin-right: 10px;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px 0 rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease-in-out, opacity 0.8s ease-in-out;
+}
+
+.btn-custom:hover {
+  background-color: #ac1fa5;
+  opacity: 0.9;
+}
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 2px solid #b81196;
+  padding: 25px;
+  width: 350px;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+}
+
+.popup h2 {
+  font-size: 1.5rem;
+  color: #333399;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup input {
+  background-color: rgba(224, 224, 224, 0.3);
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 12px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.popup input:focus {
+  border-color: #b81196;
+  box-shadow: 0 0 8px rgba(184, 17, 150, 0.5);
+  outline: none;
+}
+
+.popup button {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.popup button:first-child {
+  background-color: #333399;
+}
+
+.popup button:last-child {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.popup button:hover {
+  background: linear-gradient(135deg, #b81196, #af2694);
+  transform: scale(1.05);
+}
+
+.popup p {
+  max-width: 250px;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  text-overflow: ellipsis;
+}
+
+.popup h2, .popup p strong {
+  max-width: 90%;
+  overflow-wrap: break-word;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+  gap: 50px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.calendar-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 1300px;
+  height: 700px;
+  padding: 0 10px;
+}
+
+.rbc-calendar {
+  width: 100%;
+  max-width: 100%;
+}
+
+.hero-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+}
+.hero-comp {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 1370px) {
+  .calendar-wrapper {
+    width: 1000px;
+  }
+  .popup {
+    width: 90%;
+    padding: 20px;
+  }
+  .hero-comp {
+    width: 300px;
+  }
+}
+
+@media (max-width: 1020px) {
+  .calendar-wrapper {
+    width: 700px;
+  }
+}
+
+@media (max-width: 750px) {
+  .calendar-wrapper {
+    width: 500px;
+  }
+}
+
+@media (max-width: 520px) {
+  .calendar-wrapper {
+    width: 450px;
+  }
+}

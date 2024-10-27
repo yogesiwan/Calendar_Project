@@ -1,0 +1,25 @@
+
+.home-container {
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-start;
+}
+
+.typing {
+    position: absolute;
+    top: 15%;
+    left: 19%;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 900px) {
+    .home-container {
+        flex-direction:column-reverse; 
+        align-items: center; 
+        
+        
+    }
+    .typing {
+       display: none;
+    }
+}

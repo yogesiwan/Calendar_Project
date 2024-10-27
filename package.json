@@ -1,0 +1,13 @@
+{
+    "name": "calendar_project",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+      "calendar_frontend",
+      "calendar_backend"
+    ],
+    "scripts": {
+      "start": "npm run start --workspace=calendar_backend",
+      "dev": "npm run dev --workspace=calendar_frontend"
+    }
+  }
