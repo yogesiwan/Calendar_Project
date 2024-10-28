@@ -1,6 +1,7 @@
 const userModel = require("../models/user-model");
 const bcryptjs = require("bcryptjs");
 const { generateToken } = require("../utils/generateToken");
+const { sendEmail } = require("../utils/emailHandler");
 
 module.exports.registerUser = async function (req, res) {
   try {
@@ -24,7 +25,6 @@ module.exports.registerUser = async function (req, res) {
 
     // Generate a token for the user
     const token = generateToken(user);
-
     // Set the token as a cookie
     res.cookie("token", token);
     res.status(201).json({ message: "User registered successfully" });
@@ -50,11 +50,11 @@ module.exports.loginUser = async function (req, res) {
 
     // Generate token and send in cookie
     let token = generateToken(user);
-    
+    //sendEmail('yogeshsiwanhugies@gmail.com', 'Test Subject', 'This is a test email.');
     res.cookie("token", token, {
-      httpOnly: true,
-      secure: true, 
-      sameSite: "None",
+    //   httpOnly: true,
+    //   secure: true, 
+    //   sameSite: "None",
     });
     return res.status(200).json({ message: "Logged in Successfully", token });
   } catch (err) {

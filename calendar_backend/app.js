@@ -1,7 +1,7 @@
 const express = require('express');
 require("dotenv").config();
 const PORT = process.env.PORT || 6010;
-
+const notificationJob  = require('./utils/notificationHandler');
 const app = express();
 
 const cors = require('cors');
@@ -35,11 +35,11 @@ app.use(
         secret: process.env.EXPRESS_SESSION_SECRET,
     })
 );
+
 app.use(flash());
 
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
-
 
 // Start the server
 app.listen(PORT, () => {
