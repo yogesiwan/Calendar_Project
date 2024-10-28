@@ -29,35 +29,57 @@ const MyCalendar = (props) => {
     fetchEvents();
   }, []);
 
-  const showAlert = (message) => {
-    setAlertMessage(message);
+  const showAlert = (message, type) => {
+    setAlertMessage({ message, type });
   };
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND}/events`, {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND}/events`,
+        {
+          withCredentials: true,
+        }
+      );
 
       const eventsWithValidDates = response.data.events.map((event) => ({
         ...event,
         start: new Date(event.start),
         end: new Date(event.end),
       }));
-
       setMyEventsList(eventsWithValidDates);
     } catch (error) {
-      showAlert("Error adding event.");
+      showAlert(
+        "Some error occured, please try again after some time",
+        "error"
+      );
     }
   };
 
   const handleAddEvent = async () => {
     if (!eventStart || !eventTitle || !startTime || !endTime) {
-      showAlert("More fields are required.");
+      showAlert("More fields are required.", "error");
       return;
     }
     if (startTime === endTime) {
-      showAlert("Start time and end time cannot be the same.");
+      showAlert("Start time and end time cannot be the same.", "error");
+      return;
+    }
+
+    const startdate = new Date(
+      `${eventStart.getFullYear()}-${String(eventStart.getMonth() + 1).padStart(
+        2,
+        "0"
+      )}-${String(eventStart.getDate()).padStart(2, "0")}T${startTime}:00`
+    );
+    const enddate = new Date(
+      `${eventStart.getFullYear()}-${String(eventStart.getMonth() + 1).padStart(
+        2,
+        "0"
+      )}-${String(eventStart.getDate()).padStart(2, "0")}T${endTime}:00`
+    );
+    if (enddate < startdate) {
+      showAlert("End time cannot be earlier than start time.", "error");
       return;
     }
 
@@ -95,9 +117,10 @@ const MyCalendar = (props) => {
       setEventTitle("");
       setStartTime("09:00");
       setEndTime("10:00");
+      showAlert("Event set successfully!", "success");
     } catch (error) {
-      console.error("Error adding event:", error);
-      showAlert("Error adding event.");
+      // console.error("Error adding event:", error);
+      showAlert("Error adding event.", "error");
     }
   };
 
@@ -115,11 +138,12 @@ const MyCalendar = (props) => {
       setMyEventsList((prevEvents) =>
         prevEvents.filter((event) => event._id !== selectedEvent._id)
       );
+      showAlert("Event deleted successfully!", "success");
 
       setShowPopup(false);
       setSelectedEvent(null);
     } catch (error) {
-      showAlert("Error deleting event.");
+      showAlert("Error deleting event.", "error");
     }
   };
 
@@ -139,6 +163,24 @@ const MyCalendar = (props) => {
       return;
     }
 
+    const startdate = new Date(
+      `${eventStart.getFullYear()}-${String(eventStart.getMonth() + 1).padStart(
+        2,
+        "0"
+      )}-${String(eventStart.getDate()).padStart(2, "0")}T${startTime}:00`
+    );
+    const enddate = new Date(
+      `${eventStart.getFullYear()}-${String(eventStart.getMonth() + 1).padStart(
+        2,
+        "0"
+      )}-${String(eventStart.getDate()).padStart(2, "0")}T${endTime}:00`
+    );
+  
+    if (enddate < startdate) {
+      showAlert("End time cannot be earlier than start time.", "error");
+      return;
+    }
+
     const year = eventStart.getFullYear();
     const month = String(eventStart.getMonth() + 1).padStart(2, "0");
     const day = String(eventStart.getDate()).padStart(2, "0");
@@ -152,7 +194,7 @@ const MyCalendar = (props) => {
 
     try {
       await axios.put(
-       `${import.meta.env.VITE_BACKEND}/events/update/${selectedEvent._id}`,
+        `${import.meta.env.VITE_BACKEND}/events/update/${selectedEvent._id}`,
         updatedEvent,
         {
           withCredentials: true,
@@ -170,8 +212,9 @@ const MyCalendar = (props) => {
 
       setShowUpdatePopup(false);
       setShowPopup(false);
+      showAlert("Event updated successfully!", "success");
     } catch (error) {
-      showAlert("Error updating event.");
+      showAlert("Error updating event.", "error");
     }
   };
 
@@ -200,13 +243,14 @@ const MyCalendar = (props) => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BACKEND}/users/logout`,
-      {
-        withCredentials: true,
-      });
+        {
+          withCredentials: true,
+        }
+      );
       localStorage.removeItem("loggedIn");
       navigate("/");
     } catch (error) {
-      showAlert("Error logging out.");
+      showAlert("Error logging out.", "error");
     }
   };
 
@@ -230,7 +274,8 @@ const MyCalendar = (props) => {
         </button>
         {alertMessage && (
           <AlertBox
-            message={alertMessage}
+            message={alertMessage.message}
+            type={alertMessage.type}
             onClose={() => setAlertMessage("")}
           />
         )}
@@ -342,7 +387,11 @@ const MyCalendar = (props) => {
         </div>
       )}
       <div className="hero-wrapper">
-        <Hero className="hero-comp" events={myEventsList}></Hero>
+        <Hero
+          className="hero-comp"
+          events={myEventsList}
+          setEvents={setMyEventsList}
+        ></Hero>
       </div>
     </div>
   );

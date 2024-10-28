@@ -89,8 +89,8 @@ const LoginPage = ({ setLoggedIn }) => {
         setRememberMe(!rememberMe);
         if (!rememberMe) {
             // Autofill with dummy values
-            setEmail("tonystark@gmail.com");
-            setPassword("calendar app");
+            setEmail("yogesiwan@gmail.com");
+            setPassword("123456");
         } else {
             // Clear values if unchecked
             setEmail('');
