@@ -47,14 +47,11 @@ module.exports.loginUser = async function (req, res) {
     if (!isMatch) {
       return res.json({ message: "Invalid Email or Password" });
     }
-
-    // Generate token and send in cookie
     let token = generateToken(user);
-    //sendEmail('yogeshsiwanhugies@gmail.com', 'Test Subject', 'This is a test email.');
     res.cookie("token", token, {
-    //   httpOnly: true,
-    //   secure: true, 
-    //   sameSite: "None",
+      httpOnly: true,
+      secure: true, 
+      sameSite: "None",
     });
     return res.status(200).json({ message: "Logged in Successfully", token });
   } catch (err) {

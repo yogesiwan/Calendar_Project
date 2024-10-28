@@ -13,7 +13,7 @@ const notificationJob = cron.schedule('* * * * *', async () => {
     }).populate('user');
 
     if (upcomingEvents.length === 0) {
-      return; // Exit early if no events are found
+      return;
     }
 
     for (const event of upcomingEvents) {
