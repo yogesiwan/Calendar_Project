@@ -3,6 +3,7 @@ const express = require('express');
 require("dotenv").config();
 const PORT = process.env.PORT || 6010;
 const notificationJob  = require('./utils/notificationHandler');
+const axios = require("axios");
 const app = express();
 // const path = require("path");
 const cors = require('cors');
@@ -59,6 +60,20 @@ app.use(flash());
 
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
+
+// Keep-alive endpoint
+app.get("/keep-alive", (req, res) => {
+    res.status(200).send("Server is active");
+  });
+  setInterval(async () => {
+    try {
+      await axios.get("https://calendar-project.onrender.com/keep-alive");
+      console.log("Pinged the server to keep it alive");
+    } catch (error) {
+      console.error("Error pinging server:", error.message);
+    }
+  }, 7 * 60 * 1000); 
+
 
 // Start the server
 app.listen(PORT, () => {

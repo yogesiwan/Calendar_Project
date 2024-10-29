@@ -42,7 +42,7 @@ module.exports.loginUser = async function (req, res) {
     if (!user) {
       return res.json({ message: "Invalid Email or Password" });
     }
-
+    
     const isMatch = await bcryptjs.compare(password, user.password);
     if (!isMatch) {
       return res.json({ message: "Invalid Email or Password" });
