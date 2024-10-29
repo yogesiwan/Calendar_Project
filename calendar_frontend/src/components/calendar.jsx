@@ -175,7 +175,7 @@ const MyCalendar = (props) => {
         "0"
       )}-${String(eventStart.getDate()).padStart(2, "0")}T${endTime}:00`
     );
-  
+
     if (enddate < startdate) {
       showAlert("End time cannot be earlier than start time.", "error");
       return;
@@ -190,6 +190,11 @@ const MyCalendar = (props) => {
       start: new Date(`${year}-${month}-${day}T${startTime}:00`),
       end: new Date(`${year}-${month}-${day}T${endTime}:00`),
       description: eventDescription,
+      notification:
+        startdate.getTime() === selectedEvent.start.getTime() &&
+        enddate.getTime() === selectedEvent.end.getTime()
+          ? selectedEvent.notification
+          : false,
     };
 
     try {
@@ -201,7 +206,6 @@ const MyCalendar = (props) => {
         }
       );
 
-      // Update the event in myEventsList
       setMyEventsList((prevEvents) =>
         prevEvents.map((event) =>
           event._id === selectedEvent._id
@@ -223,8 +227,23 @@ const MyCalendar = (props) => {
     setEventTitle(event.title);
     setEventDescription(event.description);
     setEventStart(new Date(event.start));
-    setStartTime(new Date(event.start).toISOString().slice(11, 16));
-    setEndTime(new Date(event.end).toISOString().slice(11, 16));
+    const startHours = new Date(event.start)
+      .getHours()
+      .toString()
+      .padStart(2, "0");
+    const startMinutes = new Date(event.start)
+      .getMinutes()
+      .toString()
+      .padStart(2, "0");
+    setStartTime(`${startHours}:${startMinutes}`);
+
+    const endHours = new Date(event.end).getHours().toString().padStart(2, "0");
+    const endMinutes = new Date(event.end)
+      .getMinutes()
+      .toString()
+      .padStart(2, "0");
+    setEndTime(`${endHours}:${endMinutes}`);
+
     setShowPopup(true);
   };
 

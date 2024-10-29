@@ -31,6 +31,9 @@ jspm_packages/
 *.njsproj
 *.sln
 
+# config files
+config/calendar-06-firebase-adminsdk-rrnn4-f5654ec98a.json
+
 # OS-specific files
 .DS_Store
 Thumbs.db

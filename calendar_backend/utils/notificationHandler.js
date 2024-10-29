@@ -19,24 +19,24 @@ const notificationJob = cron.schedule('* * * * *', async () => {
     for (const event of upcomingEvents) {
       try {
         await sendEmail(
-          event.user.email, 
-          `⏰ Reminder: Your Upcoming Event - “${event.title}” is Starting Soon!`, 
-          `Hello ${event.user.username || 'User'},
-      
-          This is a friendly reminder that your event titled "${event.title}" is scheduled to start in 5 minutes.
-      
+            event.user.email,
+            `⏰ Reminder: Your Upcoming Event - “${event.title}” is Starting Soon!`,
+            `Hello ${event.user.username || 'User'},
+            
+          This is a friendly reminder that your event titled "${event.title}" will be starting soon.
+          
           Here are the details:
           - Event: ${event.title}
           - Description: ${event.description || "No description provided"}
           - Start Time: ${new Date(event.start).toLocaleString("en-US", { timeZone: "Asia/Kolkata" })}
           - End Time: ${new Date(event.end).toLocaleString("en-US", { timeZone: "Asia/Kolkata" })}
-      
+          
           We hope you have a productive and successful event. 
           Please let us know if you need any further assistance.
-      
+          
           Warm regards,  
           The Calendar App Team`
-        );
+          );
         event.notification = false;
 
         await event.save();

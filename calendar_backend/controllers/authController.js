@@ -1,7 +1,7 @@
 const userModel = require("../models/user-model");
 const bcryptjs = require("bcryptjs");
 const { generateToken } = require("../utils/generateToken");
-const { sendEmail } = require("../utils/emailHandler");
+const admin = require("firebase-admin");
 
 module.exports.registerUser = async function (req, res) {
   try {
@@ -50,7 +50,7 @@ module.exports.loginUser = async function (req, res) {
     let token = generateToken(user);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true, 
+      secure: true,
       sameSite: "None",
     });
     return res.status(200).json({ message: "Logged in Successfully", token });
@@ -65,4 +65,34 @@ module.exports.loginUser = async function (req, res) {
 module.exports.logout = async function (req, res) {
   res.clearCookie("token");
   res.status(200).json({ message: "Logged Out Successfully" });
+};
+
+module.exports.googleLogin = async function (req, res) {
+  const { idToken } = req.body;
+
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const email = decodedToken.email;
+    const username = decodedToken.name || email.split("@")[0];
+
+    let user = await userModel.findOne({ email });
+
+    if (!user) {
+      user = new userModel({ email, username });
+      await user.save();
+    }
+
+    let token = generateToken(user);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
+    return res.status(200).json({ message: "Logged in Successfully", token });
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "Server error, please try again later." });
+  }
 };

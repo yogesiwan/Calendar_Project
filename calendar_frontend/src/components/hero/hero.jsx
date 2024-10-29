@@ -33,16 +33,16 @@ const Hero = ({ events, setEvents }) => {
     const currentTime = new Date();
     const eventStartTime = new Date(startTime);
     const eventEndTime = new Date(endTime);
-    
+
     if (currentTime >= eventEndTime) {
       showAlert("Event has already ended.", "error");
       return;
-    } 
+    }
     if (currentTime >= eventStartTime) {
       showAlert("Event has already started.", "error");
       return;
-    } 
-    
+    }
+
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND}/events/notification/${eventId}`,
@@ -59,17 +59,27 @@ const Hero = ({ events, setEvents }) => {
               notification: response.data.notification,
             };
           }
-          return item; 
-        }); 
+          return item;
+        });
         setEvents(updatedEvents);
-        if(response.data.notification)
-        showAlert("Notification Scheduled, You will be notified 5 minutes earlier", "success");
-      else showAlert("Notifications have been turned off for this event.", "success");
+        if (response.data.notification)
+          showAlert(
+            "Notification Scheduled, You will be notified 5 minutes earlier",
+            "success"
+          );
+        else
+          showAlert(
+            "Notifications have been turned off for this event.",
+            "success"
+          );
       } else {
         showAlert(" Server error, please try again after some time", "error");
       }
     } catch (error) {
-      showAlert("Error setting notification, try again after some time", "error");
+      showAlert(
+        "Error setting notification, try again after some time",
+        "error"
+      );
     }
   };
 
@@ -111,17 +121,23 @@ const Hero = ({ events, setEvents }) => {
                       <td>{truncateTitle(event.title)}</td>
                       <td>{start.date}</td>
                       <td>
-                        <span className="mr-8">{`${start.time} - ${end.time}`}</span>
-                        <FontAwesomeIcon
-                          icon={faBell}
-                          className="bell-icon"
-                          onClick={() => notifyEvent(event._id, event.start, event.end)}
-                          style={{
-                            marginLeft: "8px",
-                            cursor: "pointer",
-                            color: event.notification ? "#e405c5" : "#d3d3d366",
-                          }}
-                        />
+                        <div className="time-bell-container">
+                          <span className="event-time">{`${start.time} - ${end.time}`}</span>
+                          <FontAwesomeIcon
+                            icon={faBell}
+                            className="bell-icon"
+                            onClick={() =>
+                              notifyEvent(event._id, event.start, event.end)
+                            }
+                            style={{
+                              marginLeft: "8px",
+                              cursor: "pointer",
+                              color: event.notification
+                                ? "#e405c5"
+                                : "#d3d3d366",
+                            }}
+                          />
+                        </div>
                       </td>
                     </tr>
                   );

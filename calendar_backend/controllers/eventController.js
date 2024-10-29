@@ -31,7 +31,7 @@ module.exports.getEvents = async (req, res) => {
 module.exports.updateEvent = async (req, res) => {
   try {
     const eventId = req.params.id;
-    const { title, description, start, end } = req.body;
+    const { title, description, start, end, notification } = req.body;
 
     const event = await eventModel.findByIdAndUpdate(
       eventId,
@@ -40,6 +40,7 @@ module.exports.updateEvent = async (req, res) => {
         description,
         start,
         end,
+        notification,
       },
       { new: true }
     );

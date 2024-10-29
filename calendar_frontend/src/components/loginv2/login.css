@@ -12,7 +12,6 @@ body {
 }
 
 
-/* Login Card */
 .login-card {
     width: 450px;
     background: rgba(255, 255, 255, .5);
@@ -30,9 +29,7 @@ body {
     border-radius: 10px;
     z-index: -1;
 }
-/* ---------- */
 
-/* Login Card Logo */
 .login-card-logo {
     margin-bottom: 2rem;
 }
@@ -40,9 +37,6 @@ body {
 .login-card-logo img {
     width: 60px;
 }
-/* ---------- */
-
-/* Login Card Standard */
 .login-card-logo,
 .login-card-header,
 .login-card-footer {
@@ -57,9 +51,7 @@ body {
 .login-card a:hover {
     text-decoration: underline;
 }
-/* ---------- */
 
-/* Login Card Header */
 .login-card-header {
     margin-bottom: 2rem;
 }
@@ -74,9 +66,7 @@ body {
     font-size: calc(1rem * .8);
     opacity: .8;
 }
-/* ---------- */
 
-/* Login Card Form */
 .login-card-form {
     display: flex;
     flex-direction: column;
@@ -108,16 +98,12 @@ body {
     font-size: calc(1rem * .8);
     margin-bottom: .5rem;
 }
-/* ---------- */
 
-/* Login Card Footer */
 .login-card-footer {
     margin-top: 1.5rem;
     font-size: calc(1rem * .8);
 }
-/* ---------- */
 
-/* Login Card Form Elements */
 .login-card input[type="text"],
 .login-card input[type="password"],
 .login-card input[type="email"] {
@@ -156,9 +142,7 @@ body {
     background-color: rgba(0, 0, 0, 0.85);
     cursor: pointer;
 }
-/* ---------- */
 
-/* Login Card Social Buttons */
 .login-card-social {
     display: flex;
     flex-direction: column;
@@ -197,17 +181,65 @@ body {
     background-color: white;
     transform: scale(1.1);
 }
-/* ---------- */
+/* Separator styling */
+.separator {
+    text-align: center;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    color: #666;
+    position: relative;
+}
 
+.separator::before,
+.separator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #ccc;
+}
 
-/* Responsive */
-@media (max-width: 768px) {
+.separator::before {
+    left: 0;
+}
 
+.separator::after {
+    right: 0;
+}
+.google-signin{
+    margin-top: -10px;
+    margin-left: 13px;
+    width: 18rem;
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+.something{
+    margin-top: -10px;
+}
+.google-signin button{
+    margin-left: -7px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.google-signin button:hover{
+    background-color: rgba(245, 222, 179, 0);
+    transform: scale(1.1); 
+}
+.google-icon{
+    color: rgb(230, 0, 255);
+    font-size: x-large;
+}
+
+@media (max-width: 560px) {
 
     .login-card {
-        width: 280px;
         padding: 2rem;
+        width: 350px;
     }
 
 }
-/* ---------- */
+
