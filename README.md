@@ -20,7 +20,7 @@
 -	🎨 User-Friendly Interface: A visually pleasing, intuitive UI that enhances user experience.
 -	📆 Multiple Calendar Views: Choose between month, week, and day views for flexible scheduling.
 -	📧 Email Notifications: Get timely reminders sent straight to your inbox.
--	
+  
 ## ⚒️ Upcoming Features
 
 - 📧 Notifications for repetitive events.
