@@ -68,11 +68,9 @@ app.get("/keep-alive", (req, res) => {
   setInterval(async () => {
     try {
       await axios.get("https://calendar-project.onrender.com/keep-alive");
-      console.log("Pinged the server to keep it alive");
     } catch (error) {
-      console.error("Error pinging server:", error.message);
     }
-  }, 7 * 60 * 1000); 
+  }, 10 * 60 * 1000); 
 
 
 // Start the server
