@@ -16,15 +16,15 @@
 
 ## 📓 Features
 
-- 📝 Users can create and customize their events.
-- 🎨 Aesthetic UI for a better user experience.
-- 📆 Month, week, and day view available for flexibility.
-
+-	📝 Event Creation & Customization: Easily create and personalize your events with unique details.
+-	🎨 User-Friendly Interface: A visually pleasing, intuitive UI that enhances user experience.
+-	📆 Multiple Calendar Views: Choose between month, week, and day views for flexible scheduling.
+-	📧 Email Notifications: Get timely reminders sent straight to your inbox.
+-	
 ## ⚒️ Upcoming Features
 
-- 📧 Email Notifications
+- 📧 Notifications for repetitive events.
 - 🐳 Containerize Codebase with Docker
-- 🔒 Email Verification and 2-Factor Authentication
 
 ## 💻 Tech-Stack
 
