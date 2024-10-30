@@ -62,6 +62,9 @@
 .rbc-button-link {
   font-weight: bold;
 }
+.rbc-day-slot .rbc-time-slot {
+  border: none;
+}
 
 .btn-custom {
   background-color: #780270;
