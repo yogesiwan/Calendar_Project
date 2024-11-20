@@ -13,7 +13,10 @@ const eventSchema = new mongoose.Schema({
     notification: { type: Boolean, default: false }
 });
 
-
 const Event = mongoose.model('event', eventSchema);
 
 module.exports = Event;
+
+
+
+

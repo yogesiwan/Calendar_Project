@@ -40,6 +40,7 @@ const flash  = require("connect-flash");
 // Routes Require
 const usersRouter = require('./routes/usersRouter');
 const eventsRouter = require("./routes/eventsRouter");
+const meetingsRouter = require("./routes/meetingsRouter");
 
 // Database require
 const db = require("./config/mongoose-connection");
@@ -60,6 +61,7 @@ app.use(flash());
 
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
+app.use('/meetings', meetingsRouter);
 
 // Keep-alive endpoint
 app.get("/keep-alive", (req, res) => {

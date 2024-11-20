@@ -9,3 +9,6 @@ router.put('/update/:id', isLoggedIn, updateEvent);
 router.delete('/delete/:id', isLoggedIn, deleteEvent);
 router.post('/notification/:id', isLoggedIn, eventNotify);
 module.exports = router;
+
+
+
