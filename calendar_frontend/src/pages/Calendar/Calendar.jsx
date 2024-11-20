@@ -6,6 +6,7 @@ const CalendarPage = () => {
       {/* <h1>Full Calendar Page</h1> */}
       <MyCalendar/>
     </div>
+    
   );
 };
 

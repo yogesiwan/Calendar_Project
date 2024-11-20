@@ -133,32 +133,13 @@
     flex-grow: 1; 
   }
 
+  @media (max-width: 1370px) {
+    .hero-card{
+        width: 650px;
+    }
+  }
+
 @media (max-width: 1070px) {
-    .hero-card {
-        width: 700px;
-        padding: 1.5rem;
-    }
-
-    .hero-welcome h2 {
-        font-size: 1.5rem;
-    }
-
-    .hero-avatar img {
-        width: 50px;
-        height: 50px;
-    }
-
-    .hero-events h3 {
-        font-size: 1.2rem;
-    }
-
-    .event-table th,
-    .event-table td {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
-}
-@media (max-width: 840px) {
     .hero-card {
         width: 500px;
         padding: 1.5rem;
@@ -181,5 +162,135 @@
     .event-table td {
         padding: 10px;
         font-size: 0.9rem;
+    }
+}
+@media (max-width: 870px) {
+    .hero-card {
+        width: 400px;
+        padding: 1.5rem;
+    }
+
+    .hero-welcome h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero-avatar img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .hero-events h3 {
+        font-size: 1.2rem;
+    }
+
+    .event-table th,
+    .event-table td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+@media (max-width: 800px) {
+    .hero-card {
+        width: 300px;
+        padding: 1rem;
+    }
+
+    .hero-welcome h2 {
+        font-size: 1rem;
+    }
+
+    .hero-avatar img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .hero-events h3 {
+        font-size: 1rem;
+    }
+
+    .event-table th,
+    .event-table td {
+        padding: 5px;
+        font-size: 0.6rem;
+    }
+}
+@media (max-width: 600px) {
+    .hero-card {
+        width: 250px;
+        padding: 0.8rem;
+        min-height: 400px;
+    }
+
+    .hero-welcome h2 {
+        font-size: 0.8rem;
+    }
+
+    .hero-avatar img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .hero-events h3 {
+        font-size: 0.8rem;
+    }
+
+    .event-table th,
+    .event-table td {
+        padding: 4px;
+        font-size: 0.5rem;
+    }
+
+    .bell-icon {
+        font-size: 1rem;
+    }
+
+    .time-bell-container {
+        gap: 5px;
+    }
+
+    .event-time {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 540px) {
+    .hero-card {
+        width: 220px;
+        padding: 0.6rem;
+        min-height: 350px;
+    }
+
+    .hero-welcome h2 {
+        font-size: 0.7rem;
+        text-align: center;
+    }
+
+    .hero-avatar img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .hero-events h3 {
+        font-size: 0.7rem;
+    }
+
+    .event-table th,
+    .event-table td {
+        padding: 3px;
+        font-size: 0.45rem;
+    }
+
+    .bell-icon {
+        font-size: 0.9rem;
+    }
+
+    .time-bell-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+    }
+
+    .event-time {
+        font-size: 0.5rem;
     }
 }

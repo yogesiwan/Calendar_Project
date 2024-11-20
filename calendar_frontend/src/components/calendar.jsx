@@ -7,6 +7,7 @@ import axios from "axios";
 import Hero from "./hero/hero";
 import { useNavigate } from "react-router-dom";
 import AlertBox from "./alertBox/alertBox";
+import UserSearch from "./scheduleMeeting/scheduleMeeting";
 
 const localizer = momentLocalizer(moment);
 
@@ -14,6 +15,7 @@ const MyCalendar = (props) => {
   const navigate = useNavigate();
 
   const [myEventsList, setMyEventsList] = useState([]);
+  const [userEventsList, setUserEventsList] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [eventTitle, setEventTitle] = useState("");
   const [eventStart, setEventStart] = useState(null);
@@ -24,10 +26,11 @@ const MyCalendar = (props) => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showUpdatePopup, setShowUpdatePopup] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [userEvents, setUserEvents] = useState([]);
 
   useEffect(() => {
     fetchEvents();
-  }, []);
+  }, [userEvents]);
 
   const showAlert = (message, type) => {
     setAlertMessage({ message, type });
@@ -47,7 +50,17 @@ const MyCalendar = (props) => {
         start: new Date(event.start),
         end: new Date(event.end),
       }));
+      // Merge the user's events with the default events
+      const userSpecificEvents = userEvents.map((event) => ({
+        ...event,
+        start: new Date(event.start),
+        end: new Date(event.end),
+        userEvent: true, // Flag to differentiate user events
+        // userName: event.user,
+      }));
+
       setMyEventsList(eventsWithValidDates);
+      setUserEventsList(userSpecificEvents);
     } catch (error) {
       showAlert(
         "Some error occured, please try again after some time",
@@ -105,7 +118,13 @@ const MyCalendar = (props) => {
           withCredentials: true,
         }
       );
-
+      if (response.data.overlaps) {
+        showAlert(
+          `Event timing overlapping with event ${response.data.event}`,
+          "error"
+        );
+        return;
+      }
       const createdEvent = {
         ...response.data.event,
         start: new Date(response.data.event.start),
@@ -198,13 +217,20 @@ const MyCalendar = (props) => {
     };
 
     try {
-      await axios.put(
+      const response = await axios.put(
         `${import.meta.env.VITE_BACKEND}/events/update/${selectedEvent._id}`,
         updatedEvent,
         {
           withCredentials: true,
         }
       );
+      if (response.data.overlaps) {
+        showAlert(
+          `Event timing overlapping with event ${response.data.event}`,
+          "error"
+        );
+        return;
+      }
 
       setMyEventsList((prevEvents) =>
         prevEvents.map((event) =>
@@ -278,12 +304,39 @@ const MyCalendar = (props) => {
       <div className="calendar-wrapper">
         <Calendar
           localizer={localizer}
-          events={myEventsList}
+          events={[...myEventsList, ...userEventsList]}
           startAccessor="start"
           endAccessor="end"
           selectable
           onSelectSlot={handleSelect}
           onSelectEvent={handleEventClick}
+          components={{
+            event: ({ event }) => (
+              <span
+                className={`title_icon_other_users ${
+                  event.userEvent ? "other_user_event" : ""
+                }`}
+              >
+                <span className="event_title">{event.title}</span>
+                {event.userEvent && event.user.username ? (
+                  <div className="circle">
+                    {event.user.username.charAt(0).toUpperCase()}
+                  </div>
+                ) : null}
+              </span>
+            ),
+          }}
+          eventPropGetter={(event) => {
+            if (event.userEvent) {
+              return {
+                style: {
+                  backgroundColor: "lightblue",
+                  color: "black",
+                },
+              };
+            }
+            return {}; // Default style for other events
+          }}
         />
         <button
           className="absolute top-5 right-5 btn-custom"
@@ -304,6 +357,12 @@ const MyCalendar = (props) => {
               Event Details{" "}
               {eventStart ? ` ${eventStart.toLocaleDateString()}` : ""}
             </h2>
+            {selectedEvent.userEvent && (
+              <p className="other_users">
+                <strong>Owner: </strong>
+                {selectedEvent.user.username.split(" ")[0]}
+              </p>
+            )}
             <p>
               <strong>Title:</strong> {selectedEvent.title}
             </p>
@@ -326,8 +385,12 @@ const MyCalendar = (props) => {
                 hour12: true,
               })}
             </p>
-            <button onClick={handleUpdateEvent}>Update Event</button>
-            <button onClick={handleDeleteEvent}>Delete Event</button>
+            {!selectedEvent.userEvent && (
+              <>
+                <button onClick={handleUpdateEvent}>Update Event</button>
+                <button onClick={handleDeleteEvent}>Delete Event</button>
+              </>
+            )}
             <button onClick={() => setShowPopup(false)}>Close</button>
           </div>
         ) : (
@@ -411,6 +474,7 @@ const MyCalendar = (props) => {
           events={myEventsList}
           setEvents={setMyEventsList}
         ></Hero>
+        <UserSearch setUserEvents={setUserEvents}></UserSearch>
       </div>
     </div>
   );

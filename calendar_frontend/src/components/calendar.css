@@ -194,6 +194,38 @@
   background-color:#c479c3;
 }
 
+.other_users{
+  color: #b814b6;
+  font-weight:bolder;
+}
+.title_icon_other_users {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  gap: 8px;
+  padding: 4px 8px; 
+}
+
+.title_icon_other_users .circle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #007bff;
+  background-color: #f0f8ff;
+  font-size: 12px; 
+  font-weight: bold;
+  color: #007bff;
+  text-transform: uppercase;
+}
+
+.title_icon_other_users:not(.other_user_event) {
+  justify-content: flex-start;
+}
+
+
 @media (max-width: 1370px) {
   .calendar-wrapper {
     width: 1000px;

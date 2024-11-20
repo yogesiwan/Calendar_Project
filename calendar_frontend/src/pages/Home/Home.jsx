@@ -51,6 +51,7 @@ const HomePage = ({ loggedIn, setLoggedIn }) => {
       </div>
 
       <Login setLoggedIn={setLoggedIn} />
+
     </div>
   );
 };

@@ -33,7 +33,6 @@ const LoginPage = ({ setLoggedIn }) => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      // console.log("User info:", user);
 
       const idToken = await user.getIdToken();
 
