@@ -69,7 +69,7 @@ app.get("/keep-alive", (req, res) => {
   });
   setInterval(async () => {
     try {
-      await axios.get("https://calendar-project.onrender.com/keep-alive");
+      await axios.get("https://calendar-project-backend.onrender.com/keep-alive");
     } catch (error) {
     }
   }, 10 * 60 * 1000); 
